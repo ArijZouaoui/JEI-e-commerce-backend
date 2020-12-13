@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const sequelize = require("../back/JEI-e-commerce-backend/server/database/connection");
 module.exports = sequelize.define("Product", {
   id: {
-    type: Sequelize.INTEGER(11),
+    type: Sequelize.STRING(50),
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
@@ -13,5 +13,5 @@ module.exports = sequelize.define("Product", {
   description: { type: Sequelize.STRING(300), allowNull: false },
   price: { type: Sequelize.INTEGER(10), allowNull: false },
   image: { type: Sequelize.STRING(300), allowNull: false },
-  userId: { type: Sequelize.INTEGER(11), allowNull: true },
+  userId: { type: Sequelize.STRING(50), allowNull: true },
 });
