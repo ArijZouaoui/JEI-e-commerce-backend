@@ -3,7 +3,9 @@ const router = express.Router();
 module.exports = router;
 const productUserCntrl = require("../controllers/productUserController");
 /*this file contains all the application-users- routes*/
-router.post("/post", productUserCntrl.post);
-router.post("/post/:id", productUserCntrl.postOne);
+router.post("/post", productUserCntrl.postOne);
 router.get("/get", productUserCntrl.get);
-router.get("/get/:id", productUserCntrl.getOne);
+router.delete("/delete" , productUserCntrl.delete);
+router.delete("/delete/:id" , productUserCntrl.deleteOne);
+
+

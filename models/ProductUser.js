@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const sequelize = require("../back/JEI-e-commerce-backend/server/database/connection");
+const sequelize = require("../database/connection");
 module.exports = sequelize.define("Product", {
   id: {
     type: Sequelize.STRING(50),

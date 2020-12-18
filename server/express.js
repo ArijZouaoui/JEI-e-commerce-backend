@@ -6,6 +6,7 @@ const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const commandeRoutes = require("./routes/commandeRoutes");
 const userRoutes = require("./routes/userRoutes");
+const ProductUserRoutes = require("./routes/ProductUserRoutes");
 
 /*fixing the cors problem */ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -31,4 +32,5 @@ app.use("/api/commandes", commandeRoutes);
 app.use("/auth/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/carts", cartRoutes);
+app.use("/api/productUser", ProductUserRoutes);
 module.exports = app;

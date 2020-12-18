@@ -4,6 +4,8 @@ const { Error } = require("sequelize");
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const ProductUser = require("../../models/ProductUser");
+User.hasMany(ProductUser, { as: "ProductUser" });
 exports.signUp = (req, res) => {
   console.log(req.body);
   User.findOne({
