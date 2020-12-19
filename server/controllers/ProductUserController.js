@@ -7,8 +7,9 @@ ProductUser.belongsTo(User , {
 });
 
 exports.get = (req,res) => {
-     ProductUser.findAll({where:req.params.id})
+     ProductUser.findAll({where:{userId:req.body.UserId}})
         .then((products) => {
+            console.log('this is the cart' + products)
             res.send(products);
         })
         .catch((err) => {
@@ -28,6 +29,7 @@ exports.postOne = (req, product) => {
         price: req.body.product.price,
         image: req.body.product.image,
         CartId: req.body.product.id,
+        quantity: 1,
     })
         .then((product) => {
             console.log(">> added product: " + JSON.stringify(product, null, 4));

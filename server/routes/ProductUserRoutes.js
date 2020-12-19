@@ -6,6 +6,6 @@ const productUserCntrl = require("../controllers/productUserController");
 router.post("/post", productUserCntrl.postOne);
 router.get("/get", productUserCntrl.get);
 router.delete("/delete" , productUserCntrl.delete);
-router.delete("/delete/:id" , productUserCntrl.deleteOne);
+router.delete("/deleteOne" , productUserCntrl.deleteOne);
 
 

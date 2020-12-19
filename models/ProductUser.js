@@ -13,5 +13,5 @@ module.exports = sequelize.define("Product", {
   description: { type: Sequelize.STRING(300), allowNull: false },
   price: { type: Sequelize.INTEGER(10), allowNull: false },
   image: { type: Sequelize.STRING(300), allowNull: false },
-  userId: { type: Sequelize.STRING(50), allowNull: true },
+
 });

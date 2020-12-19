@@ -1,4 +1,4 @@
-const sequelize = require("../database/connection");
+const sequelize = require("../../database/connection");
 
 exports.get = (req, res) => {
     sequelize.query('SELECT * FROM `Commandes` WHERE 1').then((tableCommandes) => {
