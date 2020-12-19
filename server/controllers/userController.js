@@ -4,11 +4,17 @@ const { Error } = require("sequelize");
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { verify } = require("jsonwebtoken");
+const tokenHandler = require("../utils/tokenHandler");
+const { sendRefreshToken } = require("../utils/tokenHandler");
+const { createRefreshToken } = require("../utils/tokenHandler");
+const { createAccessToken } = require("../utils/tokenHandler");
+
 exports.signUp = (req, res) => {
   console.log(req.body);
   User.findOne({
     where: {
-      email: req.body.email,
+      [Op.or]: [{ userName: req.body.userName }, { email: req.body.email }],
     },
   })
     .then((user) => {
@@ -23,7 +29,6 @@ exports.signUp = (req, res) => {
             admin: 0,
             phoneNumber: req.body.phoneNumber,
           });
-          console.log(user);
           user
             .save()
             .then(() => {
@@ -54,10 +59,11 @@ exports.signUp = (req, res) => {
 };
 
 exports.login = (req, res) => {
-  User.findOne({ email: req.body.email })
+  User.findOne({ where: { userName: req.body.userName } })
     .then((user) => {
       if (!user) {
-        res.status(401).json({
+        console.log(user);
+        return res.status(401).json({
           error: new Error("user not found !"),
         });
       }
@@ -65,31 +71,85 @@ exports.login = (req, res) => {
         .compare(req.body.password, user.password)
         .then((valid) => {
           if (!valid) {
-            res.status(401).json({
+            return res.status(401).json({
               error: new Error(" password and email address do not match !"),
             });
           }
-          const token = jwt.sign(
-            { userId: user._id },
-            "3f5eKxTGOAgf6AbUiP4qB",
-            { expiresIn: "24h" }
-          );
-          res.status(200).json({
-            userId: user._id,
-            token: token,
+
+          sendRefreshToken(res, createRefreshToken(user));
+          const AccessToken = tokenHandler.createAccessToken(user);
+          return res.status(200).json({
+            userName: user.userName,
+            admin: user.admin,
+            userId: user.id,
+            accessToken: AccessToken,
           });
         })
         .catch((error) => {
-          res.status(500).json({
+          console.log(error);
+
+          return res.status(500).json({
             error: error,
           });
-          console.log(error);
         });
     })
     .catch((error) => {
-      res.status(500).json({
+      console.log(error);
+
+      return res.status(500).json({
         error: error,
       });
-      console.log(error);
     });
+};
+
+exports.logOut = (req, res) => {
+  sendRefreshToken(res, "");
+  return res.status(200).json({
+    message: "user logedOut successfully",
+  });
+};
+
+exports.refreshToken = (req, res) => {
+  const refreshT = req.cookies.jid;
+  console.log(req.cookies);
+  if (!refreshT) {
+    return res.status(401).json({ error: new Error("user not loged in !") });
+  } else {
+    let payload = null;
+    try {
+      payload = jwt.verify(refreshT, "bjqvbvvbjlkqfvuijkrfqv");
+    } catch (err) {
+      if (err.name === "TokenExpiredError") {
+        jwt.sign();
+      }
+      return res.status(500).json({
+        message: payload,
+        error: err,
+      });
+    }
+    // token is valid and
+    // we can send back an access token
+    console.log(payload);
+    User.findOne({ where: { userName: payload.userName } })
+      .then((user) => {
+        if (!user) {
+          return res.status(401).json({ error: new Error("user not found !") });
+        }
+        if (user.tokenVersion !== payload.tokenVersion) {
+          return res
+            .status(401)
+            .json({ error: new Error("user not authorized TV do not !") });
+        }
+        sendRefreshToken(res, createRefreshToken(user));
+        res.status(200).json({
+          accessToken: createAccessToken(user),
+          userId: user.id,
+          userName: user.userName,
+          admin: user.admin,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err });
+      });
+  }
 };
