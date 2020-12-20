@@ -9,9 +9,12 @@ const tokenHandler = require("../utils/tokenHandler");
 const { sendRefreshToken } = require("../utils/tokenHandler");
 const { createRefreshToken } = require("../utils/tokenHandler");
 const { createAccessToken } = require("../utils/tokenHandler");
-
+//all the user logic  : Mohamed Achich
 exports.signUp = (req, res) => {
+  //handle signup requests
+
   console.log(req.body);
+  //search for a user with the same username or email  in the DB
   User.findOne({
     where: {
       [Op.or]: [{ userName: req.body.userName }, { email: req.body.email }],
@@ -19,6 +22,7 @@ exports.signUp = (req, res) => {
   })
     .then((user) => {
       if (!user) {
+        //  cryptage du mdp avant le stockage dans la DB
         bcrypt.hash(req.body.password, 10).then((hashedPassword) => {
           const user = User.build({
             id: uuidv4(),
@@ -59,6 +63,7 @@ exports.signUp = (req, res) => {
 };
 
 exports.login = (req, res) => {
+  //handle login requests
   User.findOne({ where: { userName: req.body.userName } })
     .then((user) => {
       if (!user) {
@@ -110,6 +115,7 @@ exports.logOut = (req, res) => {
 };
 
 exports.refreshToken = (req, res) => {
+  //to check if the user  already signed up when he opens the app or refreshes if true then he automatically logedIn
   const refreshT = req.cookies.jid;
   console.log(req.cookies);
   if (!refreshT) {

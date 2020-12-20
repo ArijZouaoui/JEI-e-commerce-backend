@@ -9,6 +9,8 @@ const commandeRoutes = require("./routes/commandeRoutes");
 const userRoutes = require("./routes/userRoutes");
 const cookieParser = require("cookie-parser");
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+//dabatabse setup and routes/controllers setup : Mohamed Achich
+
 //to access req body
 app.use(cookieParser());
 app.use(bodyParser.json());

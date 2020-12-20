@@ -1,3 +1,5 @@
+//all the logic below : Mohamed Achich
+
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize("8Uri3PqS7d", "8Uri3PqS7d", "gO69Uazj1R", {
   host: "remotemysql.com",

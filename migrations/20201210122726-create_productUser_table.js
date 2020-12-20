@@ -1,4 +1,5 @@
 "use strict";
+//database Setup  : Mohamed Achich
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
