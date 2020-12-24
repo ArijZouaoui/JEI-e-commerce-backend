@@ -3,12 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e29b38e4-d62d-4d41-a2eb-2745f453728d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/connection.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/connection.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/ProductUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/ProductUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/ProductUserController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/ProductUserController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/commandeController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/commandeController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/ProductUserRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/ProductUserRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/ProductUserController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/productUserController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/express.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/express.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/ProductUserRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/productUserRoutes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +68,10 @@
       <workItem from="1608055410029" duration="3416000" />
       <workItem from="1608297377968" duration="7825000" />
       <workItem from="1608319685673" duration="5820000" />
-      <workItem from="1608407863655" duration="8372000" />
+      <workItem from="1608407863655" duration="8664000" />
+      <workItem from="1608677514416" duration="10367000" />
+      <workItem from="1608716513021" duration="8249000" />
+      <workItem from="1608727696785" duration="15244000" />
     </task>
     <servers />
   </component>

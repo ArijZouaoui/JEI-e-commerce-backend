@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../database/connection");
-module.exports = sequelize.define("Product", {
+module.exports = sequelize.define("ProductUser", {
   id: {
     type: Sequelize.STRING(50),
     allowNull: false,

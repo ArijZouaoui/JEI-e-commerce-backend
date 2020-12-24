@@ -6,7 +6,7 @@ const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const commandeRoutes = require("./routes/commandeRoutes");
 const userRoutes = require("./routes/userRoutes");
-const ProductUserRoutes = require("./routes/ProductUserRoutes");
+const productUserRoutes = require("./routes/productUserRoutes");
 
 /*fixing the cors problem */ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -23,7 +23,7 @@ const ProductUserRoutes = require("./routes/ProductUserRoutes");
 
 //to access req body
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: false }));
 //connetion to database
 require("../database/connection"); /*security breach */
 
@@ -32,5 +32,5 @@ app.use("/api/commandes", commandeRoutes);
 app.use("/auth/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/carts", cartRoutes);
-app.use("/api/productUser", ProductUserRoutes);
+app.use("/api/productUser", productUserRoutes);
 module.exports = app;
