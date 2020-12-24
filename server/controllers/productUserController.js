@@ -21,7 +21,34 @@ exports.get = (req,res) => {
 };
 
 exports.postOne = (req, res) => {
-    res.send(req.body)
+ return ProductUser.findOne({where:{ id:req.body.id ,UserId:req.body.UserId}})
+.then((productFound) => {  if(productFound){
+    return ProductUser.update({ quantity: sequelize.literal('quantity + 1') }, { where: { id:req.body.id, UserId:req.body.UserId } })
+        .then((productUpdated) =>{
+            console.log("product updated");
+            res.send(productUpdated);
+        })}
+        else {   return ProductUser.create({
+    id: req.body.id,
+    name: req.body.name,
+    description : req.body.description,
+    category : req.body.description,
+    image : req.body.image,
+    UserId:req.body.UserId,
+    price :req.body.price,
+    quantity:1,})
+    .then((productAded) => {
+    console.log("product added to cart ");
+        res.send(productAded);})
+
+}
+    })
+        .catch((err) => {
+            console.log(">> Error : ", err);
+        });
+
+
+
 };
 
 
